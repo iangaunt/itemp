@@ -17,6 +17,9 @@ struct Args {
 fn main() {
     let args = Args::parse();
 
+    let intro: String = String::from("Attempting to clone ") + &args.template + "-template into " + &args.location + "...";
+    println!("{}", intro);
+
     let clone = String::from("git clone https://github.com/iangaunt/") + &args.template + "-template.git ./" + &args.location;
     let _output = Command::new("cmd")
         .args(["/C", &clone]).output().expect("gg");
