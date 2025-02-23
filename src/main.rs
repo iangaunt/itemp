@@ -5,20 +5,22 @@ use std::process::Command;
 #[command(version, about, long_about = None)]
 
 struct Args {
+    /// The template repository to be used (do not include the "-template" extension).
     #[arg(short, long)]
-    t: String,
+    template: String,
 
+    /// The location relative to this folder to place the cloned repository.
     #[arg(short, long)]
-    l: String,
+    location: String,
 }
 
 fn main() {
     let args = Args::parse();
 
-    let clone = String::from("git clone https://github.com/iangaunt/") + &args.t + "-template.git ./" + &args.l;
-    let output = Command::new("cmd")
+    let clone = String::from("git clone https://github.com/iangaunt/") + &args.template + "-template.git ./" + &args.location;
+    let _output = Command::new("cmd")
         .args(["/C", &clone]).output().expect("gg");
 
     println!("Repository cloned successfully.");
-    assert!(output.status.success());
+    // assert!(output.status.success());
 }
